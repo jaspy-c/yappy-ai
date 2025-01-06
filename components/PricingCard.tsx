@@ -1,0 +1,77 @@
+'use client'
+import { Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { pricingPlans, TierNames } from '@/lib/db/pricingplans';
+import { createCancelSession, createCheckoutSession } from '@/actions/stripe';
+
+export type PricingPlan = typeof pricingPlans[keyof typeof pricingPlans];
+
+export function PricingCard ({ title, price, description, features, period, isPopular, currentTierName, cancelAtPeriodEnd}: PricingPlan & {currentTierName: TierNames; cancelAtPeriodEnd: boolean | undefined; currentPeriodEnd: Date| null;}) {
+  const isCurrent = currentTierName === title
+
+  const isCanceledButValid =
+  cancelAtPeriodEnd === true
+
+
+  // Disable the button if:
+  // - It's the current plan
+  // - It's a free plan but the subscription is canceled but still valid
+  const isButtonDisabled = 
+  !!(isCurrent || (title === 'Free' && isCanceledButValid));
+
+
+  // Find the specific plans by name for savings calculation
+  const basicPlan = pricingPlans.Basic;
+  const proPlan = pricingPlans.Pro;
+
+  // Calculate savings percentage if both monthly and yearly plans are available
+  let savingsPercentage: number | null = null;
+  if (basicPlan && proPlan) {
+    const yearlyEquivalent = basicPlan.price * 12;
+    savingsPercentage = Math.round(((yearlyEquivalent - proPlan.price) / yearlyEquivalent) * 100);
+  }
+
+  return (
+    <div className='border flex flex-col bg-white/80 justify-between rounded-lg h-full p-6 hover:shadow-md hover:bg-white text-left relative transition-colors duration-300'>
+      {isPopular && (
+        <div className='absolute top-0 right-0 bg-slate-900 text-white px-2 py-1 rounded-bl-lg rounded-tr-lg'> Popular </div>
+      )}
+      {title === 'Pro' && savingsPercentage !== null && (
+        <div className='absolute top-0 right-0 bg-slate-900 text-white px-2 py-1 rounded-bl-lg rounded-tr-lg'> Save {savingsPercentage}% </div>
+      )}
+      <div>
+        <div className='inline-flex items-end'>
+          <h1 className='font-extrabold text-3xl'>${price}</h1>
+          {period && <h3 className='ml-2 font-semibold text-gray-700'> / {period}</h3>}
+        </div>
+
+        <h2 className='font-bold text-xl my-2'>{title}</h2>
+        <p>{description}</p>
+        <div className='flex-grow border-t border-gray-400 opacity-25 my-4'></div>
+        <ul>
+          {features.map((feature, index) => (
+            <li key={index} className='flex flex-row items-center text-gray-700 gap-2 my-2'>
+              <div className='rounded-full flex items-center justify-center w-4 h-4 bg-green-500 mr-3'>
+                <Check className='text-white' width={10} height={10} />
+              </div>
+              <p>{feature}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+     <Button
+        className="w-full mt-2 hover:bg-blue-700"
+        disabled={isButtonDisabled}
+        onClick={() => {
+          if (title === "Free") {
+            createCancelSession(); // Call the cancel session function if it's the "Free" plan
+          } else {
+            createCheckoutSession(title); // Call the checkout session function with the title
+          }
+        }}
+      >
+        {isCurrent ? 'Current Plan' : (title === 'Free') && isCanceledButValid ? 'Downgrade Pending' : 'Select Plan'}
+      </Button>
+    </div>
+  );
+};

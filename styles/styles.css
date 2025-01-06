@@ -1,0 +1,21 @@
+/* Scroll container and sections */
+@media (min-width: 1024px) {
+  .scroll-container {
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory; /* Enable snap type for large screens */
+    scroll-behavior: smooth; /* Smooth scrolling */
+  }
+
+  .section {
+    scroll-snap-align: start; /* Snap sections to the start of the viewport */
+  }
+}
+
+/* On smaller screens (below 1024px), disable snapping */
+@media (max-width: 1023px) {
+  .scroll-container {
+    overflow-y: auto; /* No scroll snapping */
+  }
+}
