@@ -49,28 +49,28 @@ const LandingPage = () => {
         <div
           ref={addToRefs}
           id="home-section"
-          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center h-screen"
+          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center min-h-screen"
         >
           <HomeSection />
         </div>
         <div
           ref={addToRefs}
           id="pricing-section"
-          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center h-screen"
+          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center min-h-screen"
         >
           <PricingSection />
         </div>
         <div
           ref={addToRefs}
           id="faq-section"
-          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center h-screen"
+          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center min-h-screen"
         >
           <FAQSection />
         </div>
         <div
           ref={addToRefs}
           id="contact-section"
-          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center h-screen"
+          className="section opacity-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center min-h-screen"
         >
           <ContactSection />
         </div>
