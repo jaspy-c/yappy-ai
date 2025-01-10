@@ -33,7 +33,6 @@ export async function POST(req: Request) {
   const body = JSON.stringify(payload)
 
   const wh = new Webhook(env.CLERK_WEBHOOK_SECRET)
-  console.log(env.CLERK_WEBHOOK_SECRET)
   let event: WebhookEvent
 
   try {
