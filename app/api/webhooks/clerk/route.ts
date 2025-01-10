@@ -17,6 +17,9 @@ export async function POST(req: Request) {
   const svixTimestamp = headerPayload.get("svix-timestamp")
   const svixSignature = headerPayload.get("svix-signature")
 
+  console.log("Webhook received at:", new Date().toISOString());
+  console.log("Request headers:", Object.fromEntries(headers()));
+
   if (!svixId || !svixTimestamp || !svixSignature) {
     return new Response("Error occurred -- no svix headers", {
       status: 400,
@@ -27,6 +30,7 @@ export async function POST(req: Request) {
   const body = JSON.stringify(payload)
 
   const wh = new Webhook(env.CLERK_WEBHOOK_SECRET)
+  console.log(env.CLERK_WEBHOOK_SECRET)
   let event: WebhookEvent
 
   try {
