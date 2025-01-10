@@ -17,8 +17,11 @@ export async function POST(req: Request) {
   const svixTimestamp = headerPayload.get("svix-timestamp")
   const svixSignature = headerPayload.get("svix-signature")
 
-  console.log("Webhook received at:", new Date().toISOString());
-  console.log("Request headers:", Object.fromEntries(headers()));
+  console.log({
+    hasClerkSecret: !!env.CLERK_WEBHOOK_SECRET,
+    secretFirstChars: env.CLERK_WEBHOOK_SECRET?.substring(0, 4),
+    // Don't log the full secret
+  });
 
   if (!svixId || !svixTimestamp || !svixSignature) {
     return new Response("Error occurred -- no svix headers", {
