@@ -4,6 +4,14 @@ import './globals.css';
 import Providers from '@/components/Providers';
 import { Toaster } from 'react-hot-toast';
 
+export const metadata = {
+  title: "Yappy-AI",
+  description: "AI Chatbot PDF Analyzer", // Optional
+  icons: {
+    icon: "/favicon.ico", // Path to your favicon file
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
