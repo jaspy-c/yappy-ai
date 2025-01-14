@@ -8,7 +8,7 @@ export const metadata = {
   title: "Yappy-AI",
   description: "AI Chatbot PDF Analyzer", // Optional
   icons: {
-    icon: "/favicon.ico", // Path to your favicon file
+    icon: "@/assets/images/favicon.ico", // Path to your favicon file
   },
 };
 
