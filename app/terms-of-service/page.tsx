@@ -13,7 +13,7 @@ const PrivacyPolicyPage = async () => {
             <br></br>
 
             <h2 className='text-xl my-3 font-bold'>1. Acceptance of Terms</h2>
-            By accessing or using the Yappy-AI web application (the "Service"), you agree to comply with and be bound by these Terms of Service and our Privacy Policy. If you do not agree with these terms, please do not use the Service.
+            By accessing or using the Yappy-AI web application (the &quot;Service&quot;), you agree to comply with and be bound by these Terms of Service and our Privacy Policy. If you do not agree with these terms, please do not use the Service.
 
             <h2 className='text-xl my-3 font-bold'>2. User Eligibility</h2>
             You must be at least 18 years of age to use the Service. By using the Service, you confirm that you are 18 years or older. If you are using the Service on behalf of a company or organization, you represent that you have the authority to bind that entity to these Terms of Service.
