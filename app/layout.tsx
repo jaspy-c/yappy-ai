@@ -5,10 +5,10 @@ import Providers from '@/components/Providers';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
-  title: "Yappy-AI",
+  title: "Yappy AI | PDF Chatbot Analyzer",
   description: "AI Chatbot PDF Analyzer", // Optional
   icons: {
-    icon: "@/assets/images/favicon.ico", // Path to your favicon file
+    icon: "/favicon.ico", // Path to your favicon file
   },
 };
 
